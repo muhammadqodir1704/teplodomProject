@@ -22,9 +22,9 @@ function Navbar() {
             />
             <div>
               <h3 style={{ color: "#FF5F00" }}>TEPLODOM</h3>
-              <p style={{ margin: 0, lineHeight: "1.2" }}>
+              {/* <p style={{ margin: 0, lineHeight: "1.2" }}>
                 Интернет магазин <br /> строй материалов
-              </p>
+              </p> */}
             </div>
           </div>
         </NavLink>
