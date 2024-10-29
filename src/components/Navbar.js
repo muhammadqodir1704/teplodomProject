@@ -52,11 +52,11 @@ function Navbar() {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <div style={{ position: "relative" }}>
-              <FaRegHeart style={{ fontSize: "30px", cursor: "pointer" }} />
-              {likedProducts.length > 0 && ( // Liked products count
+              <FaRegHeart style={{ fontSize: "30px", cursor: "pointer"}} />
+              {likedProducts.length > 0 && ( 
                 <span
                   className="badge bg-danger"
-                  style={{ position: "absolute", top: "-5px", right: "-10px" }}
+                  style={{ position: "absolute", top: "-10px", right: "-16px" ,borderRadius: "50%"}}
                 >
                   {likedProducts.length}
                 </span>
@@ -72,10 +72,10 @@ function Navbar() {
               <RiShoppingBag4Line
                 style={{ fontSize: "30px", cursor: "pointer" }}
               />
-              {cartItemCount > 0 && ( // Cart item count
+              {cartItemCount > 0 && (
                 <span
                   className="badge bg-danger"
-                  style={{ position: "absolute", top: "-5px", right: "-10px" }}
+                  style={{ position: "absolute", top: "-10px", right: "-16px" , borderRadius: "50%" }}
                 >
                   {cartItemCount}
                 </span>
