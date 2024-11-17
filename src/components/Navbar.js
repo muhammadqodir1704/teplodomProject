@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import logo from "./Images/logo.png";
 import { FaRegHeart } from "react-icons/fa";
 import { RiShoppingBag4Line } from "react-icons/ri";
@@ -6,9 +6,13 @@ import { CgProfile } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import RegistrationModal from "./RegistrationModal"; 
 
 function Navbar() {
   const { cartItemCount, likedProducts } = useContext(CartContext);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const handleOpenRegisterModal = () => setShowRegisterModal(true);
+  const handleCloseRegisterModal = () => setShowRegisterModal(false);
 
   return (
     <div>
@@ -22,9 +26,9 @@ function Navbar() {
             />
             <div>
               <h3 style={{ color: "#FF5F00" }}>TEPLODOM</h3>
-              {/* <p style={{ margin: 0, lineHeight: "1.2" }}>
+              <p style={{ margin: 0, lineHeight: "1.2" }}>
                 Интернет магазин <br /> строй материалов
-              </p> */}
+              </p>
             </div>
           </div>
         </NavLink>
@@ -47,16 +51,18 @@ function Navbar() {
           />
         </div>
         <div className="d-flex gap-5 align-items-center justify-content-center">
-          <NavLink
-            to="/LikedProducts"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
+          <NavLink to="/LikedProducts" style={{ textDecoration: "none", color: "inherit" }}>
             <div style={{ position: "relative" }}>
-              <FaRegHeart style={{ fontSize: "30px", cursor: "pointer"}} />
-              {likedProducts.length > 0 && ( 
+              <FaRegHeart style={{ fontSize: "30px", cursor: "pointer" }} />
+              {likedProducts.length > 0 && (
                 <span
                   className="badge bg-danger"
-                  style={{ position: "absolute", top: "-10px", right: "-16px" ,borderRadius: "50%"}}
+                  style={{
+                    position: "absolute",
+                    top: "-10px",
+                    right: "-16px",
+                    borderRadius: "50%",
+                  }}
                 >
                   {likedProducts.length}
                 </span>
@@ -64,18 +70,18 @@ function Navbar() {
             </div>
           </NavLink>
 
-          <NavLink
-            to="/Cart"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
+          <NavLink to="/Cart" style={{ textDecoration: "none", color: "inherit" }}>
             <div style={{ position: "relative" }}>
-              <RiShoppingBag4Line
-                style={{ fontSize: "30px", cursor: "pointer" }}
-              />
+              <RiShoppingBag4Line style={{ fontSize: "30px", cursor: "pointer" }} />
               {cartItemCount > 0 && (
                 <span
                   className="badge bg-danger"
-                  style={{ position: "absolute", top: "-10px", right: "-16px" , borderRadius: "50%" }}
+                  style={{
+                    position: "absolute",
+                    top: "-10px",
+                    right: "-16px",
+                    borderRadius: "50%",
+                  }}
                 >
                   {cartItemCount}
                 </span>
@@ -84,6 +90,7 @@ function Navbar() {
           </NavLink>
 
           <button
+            onClick={handleOpenRegisterModal}
             style={{
               backgroundColor: "#FFFF",
               border: "1px solid #ccc",
@@ -103,7 +110,8 @@ function Navbar() {
       </div>
 
       <div className="d-flex justify-content-center gap-5 mt-3">
-        <NavLink to="/Tovar" activeClassName="active">
+     
+      <NavLink to="/Tovar">
           {({ isActive }) => (
             <button
               className={isActive ? "active" : ""}
@@ -121,7 +129,7 @@ function Navbar() {
             </button>
           )}
         </NavLink>
-        <NavLink to="/Novinki" activeClassName="active">
+        <NavLink to="/Novinki">
           {({ isActive }) => (
             <button
               className={isActive ? "active" : ""}
@@ -139,7 +147,7 @@ function Navbar() {
             </button>
           )}
         </NavLink>
-        <NavLink to="/Pastivshik" activeClassName="active">
+        <NavLink to="/Pastivshik">
           {({ isActive }) => (
             <button
               className={isActive ? "active" : ""}
@@ -157,7 +165,7 @@ function Navbar() {
             </button>
           )}
         </NavLink>
-        <NavLink to="/Contakt" activeClassName="active">
+        <NavLink to="/Contakt">
           {({ isActive }) => (
             <button
               className={isActive ? "active" : ""}
@@ -175,7 +183,7 @@ function Navbar() {
             </button>
           )}
         </NavLink>
-        <NavLink to="/Vozvrat" activeClassName="active">
+        <NavLink to="/Vozvrat">
           {({ isActive }) => (
             <button
               className={isActive ? "active" : ""}
@@ -193,7 +201,14 @@ function Navbar() {
             </button>
           )}
         </NavLink>
+    
       </div>
+
+      {/* Register Modal */}
+      <RegistrationModal
+        show={showRegisterModal}
+        onClose={handleCloseRegisterModal}
+      />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import Brend4 from "./Images/brend4.png";
 import Brend5 from "./Images/brend5.png";
 function Brend() {
   return (
-    <div style={{ marginBottom: "150px" }} className="container mt-5">
+    <div style={{ marginBottom: "150px" }} className="mt-5 container">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Бренды</h2>
         <a href="#" style={allCategoriesStyle}>

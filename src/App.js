@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -9,6 +10,13 @@ import {
 } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
 import Main from "./components/Main";
+import RegistrationModal from "./components/RegistrationModal"; // Ro'yxatdan o‘tish modal
+import LoginModal from "./components/LoginModal"; // Login modal
+import PrivateRoute from "./components/PrivateRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Sahifalar
 import Tovar from "./pages/Tovar";
 import Pastivshik from "./pages/Pastivshik";
 import Vozvrat from "./pages/Vozvrat";
@@ -17,20 +25,53 @@ import Novinki from "./pages/Novinki";
 import Cart from "./pages/Cart";
 import DetailPage from "./pages/DetailPage";
 import LikedProducts from "./pages/LikedProducts";
-import { ToastContainer } from "react-toastify";
 import AllCategory from "./pages/AllCategory";
 import AllProducts from "./pages/AllProducts";
-import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Main />} />
-      <Route path="tovar" element={<Tovar />} />
-      <Route path="pastivshik" element={<Pastivshik />} />
-      <Route path="vozvrat" element={<Vozvrat />} />
-      <Route path="contakt" element={<Contakt />} />
-      <Route path="novinki" element={<Novinki />} />
+      <Route
+        path="tovar"
+        element={
+          <PrivateRoute>
+            <Tovar />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="pastivshik"
+        element={
+          <PrivateRoute>
+            <Pastivshik />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="vozvrat"
+        element={
+          <PrivateRoute>
+            <Vozvrat />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="contakt"
+        element={
+          <PrivateRoute>
+            <Contakt />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="novinki"
+        element={
+          <PrivateRoute>
+            <Novinki />
+          </PrivateRoute>
+        }
+      />
       <Route path="cart" element={<Cart />} />
       <Route path="likedProducts" element={<LikedProducts />} />
       <Route path="detail-page" element={<DetailPage />} />
@@ -40,12 +81,46 @@ const router = createBrowserRouter(
   )
 );
 
-function App() {
+function AppContent() {
+  const { isAuthenticated } = useAuth(); // useAuth bu yerda ishlaydi
+  const [showRegistrationModal, setShowRegistrationModal] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleShowLogin = () => {
+    setShowRegistrationModal(false);
+    setShowLoginModal(true);
+  };
+
+  const handleCloseModals = () => {
+    setShowRegistrationModal(false);
+    setShowLoginModal(false);
+  };
+
   return (
-    <CartProvider>
+    <>
       <RouterProvider router={router} />
       <ToastContainer />
-    </CartProvider>
+      {!isAuthenticated && (
+        <>
+          <RegistrationModal
+            show={showRegistrationModal}
+            onClose={handleCloseModals}
+            onSwitchToLogin={handleShowLogin}
+          />
+          <LoginModal show={showLoginModal} onClose={handleCloseModals} />
+        </>
+      )}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

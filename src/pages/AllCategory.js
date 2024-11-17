@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
 function AllCategory() {
   return (
-    <div className="container mt-4">
-      <h1>AllCategory</h1>
-    </div>
-  );
+    <div className='container mt-3'>
+      <h2>All Categories</h2>
+      </div>
+  )
 }
 
-export default AllCategory;
+export default AllCategory  

@@ -79,3 +79,40 @@ button.active {
   background-color: transparent;
   padding: 10px 0;
 }
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn-warning {
+  background-color: #fca503;
+  border: none;
+}
+
+.custom-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.7); /* Adjust the opacity to your liking */
+}
+
+.outlet{
+  flex: auto;
+}
+.min-height{
+  min-height: 100vh;
+}

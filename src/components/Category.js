@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 function Category() {
   return (
-    <div style={{ marginBottom: "150px" }} className="container mt-5">
+    <div style={{ marginBottom: "150px" }} className="mt-5 container">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Категории</h2>
         <NavLink

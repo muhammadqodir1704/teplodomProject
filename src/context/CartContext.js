@@ -42,7 +42,7 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => {
       const updatedItems = prevItems.filter((item) => item.id !== product.id);
       if (updatedItems.length !== prevItems.length) {
-        notifyDelete();
+        // notifyDelete();
         setCartItemCount((count) => count - 1);
       }
       return updatedItems;

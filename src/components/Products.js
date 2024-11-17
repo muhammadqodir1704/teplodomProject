@@ -58,6 +58,12 @@ function Products() {
               <div className="card-body">
                 <NavLink
                   to="/detail-page"
+                  state={{
+                    title: product.title,
+                    description: product.description,
+                    price: product.price,
+                    images: product.images,
+                  }}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <h5 className="card-title">
